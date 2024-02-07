@@ -52,3 +52,11 @@ export const BoardCard = (props: props) => {
     </Link>
   );
 };
+
+BoardCard.Skeleton = function BoardCardSkeleton() {
+  return (
+    <div className="aspect-[100/127] rounded-lg overflow-hidden">
+      <div className="h-full w-full bg-muted-foreground/40 animate-pulse" />
+    </div>
+  );
+};

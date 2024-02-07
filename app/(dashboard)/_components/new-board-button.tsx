@@ -9,6 +9,7 @@ import { toast } from "sonner";
 type props = {
   orgId: string;
   disabled?: boolean;
+  loading?: boolean;
 };
 
 export const NewBoardButton = (props: props) => {
@@ -32,7 +33,8 @@ export const NewBoardButton = (props: props) => {
       className={cn(
         `group col-span-1 aspect-[100/127] bg-blue-600 rounded-lg
       hover:bg-blue-800 flex flex-col items-center justify-center py-6`,
-        props.disabled || (pending && "opacity-75")
+        props.disabled && "cursor-not-allowed opacity-75 hover:bg-blue-600",
+        (pending || props.loading) && "cursor-wait opacity-75 hover:bg-blue-600",
       )}
     >
       <div />
