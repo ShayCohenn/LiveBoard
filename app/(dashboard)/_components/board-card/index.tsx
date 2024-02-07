@@ -6,6 +6,8 @@ import Overlay from "./Overlay";
 import { useAuth } from "@clerk/nextjs";
 import { formatDistanceToNow } from "date-fns";
 import Footer from "./Footer";
+import Actions from "@/components/Actions";
+import { MoreHorizontal } from "lucide-react";
 
 type props = {
   id: string;
@@ -39,6 +41,17 @@ export const BoardCard = (props: props) => {
             className="object-fill"
           />
           <Overlay />
+          <Actions id={props.id} title={props.title} side="bottom">
+            <button
+              className="absolute top-1 right-1 opacity-0
+            group-hover:opacity-100 transition-opacity px-3 py-2 outline-none"
+            >
+              <MoreHorizontal
+                className="text-white opacity-70 hover:opacity-100 
+              transition-opacity"
+              />
+            </button>
+          </Actions>
         </div>
         <Footer
           isFavorite={props.isFavorite}
