@@ -7,8 +7,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Link2 } from "lucide-react";
+import { Link, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { useApiMutation } from "@/hooks/use-api-mutation";
+import { api } from "@/convex/_generated/api";
+import { Button } from "./ui/button";
+import { useRenameModal } from "@/store/use-rename-modal";
+import { ConfirmModal } from "./ConfirmModal";
 
 type props = {
   children: React.ReactNode;
@@ -19,11 +24,20 @@ type props = {
 };
 
 const Actions = (props: props) => {
+  const { mutate, pending } = useApiMutation(api.board.remove);
+  const { onOpen } = useRenameModal();
+
   const onCopyLink = () => {
     navigator.clipboard
       .writeText(`${window.location.origin}/board/${props.id}`)
       .then(() => toast.success("Link copied"))
       .catch(() => toast.error("Failed to copy link"));
+  };
+
+  const onDelete = () => {
+    mutate({ id: props.id })
+      .then(() => toast.success("Board deleted"))
+      .catch(() => toast.error("Failed to delete board"));
   };
   return (
     <DropdownMenu>
@@ -36,11 +50,34 @@ const Actions = (props: props) => {
       >
         <DropdownMenuItem
           onClick={onCopyLink}
-          className="p-3 cursor-pointer hover:bg-muted-foreground/20"
+          className="p-3 cursor-pointer hover:font-semibold"
         >
-          <Link2 className="h-4 w-4 mr-2" />
+          <Link className="h-4 w-4 mr-2" />
           Copy Board Link
         </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => onOpen(props.id, props.title)}
+          className="p-3 cursor-pointer hover:font-semibold"
+        >
+          <Pencil className="h-4 w-4 mr-2" />
+          Rename
+        </DropdownMenuItem>
+        <ConfirmModal
+          header="Delete board?"
+          description="This will delete the board and all of its contents.
+          This action cannot be undone."
+          onConfirm={onDelete}
+          disabled={pending}
+        >
+          <Button
+            variant={"ghost"}
+            className="p-3 text-sm w-full justify-start font-normal 
+          hover:font-semibold"
+          >
+            <Trash2 className="h-4 w-4 mr-2" />
+            Delete
+          </Button>
+        </ConfirmModal>
       </DropdownMenuContent>
     </DropdownMenu>
   );
