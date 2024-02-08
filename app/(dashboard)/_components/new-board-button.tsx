@@ -4,6 +4,7 @@ import { api } from "@/convex/_generated/api";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 type props = {
@@ -13,6 +14,7 @@ type props = {
 };
 
 export const NewBoardButton = (props: props) => {
+  const router = useRouter();
   const { mutate, pending } = useApiMutation(api.board.create);
 
   const onClick = () => {
@@ -22,7 +24,7 @@ export const NewBoardButton = (props: props) => {
     })
       .then((id) => {
         toast.success("Board created successfully");
-        //TODO: redirect to /board/{id}
+        router.push(`/board/${id}`);
       })
       .catch(() => toast.error("Failed to create board"));
   };
@@ -34,7 +36,8 @@ export const NewBoardButton = (props: props) => {
         `group col-span-1 aspect-[100/127] bg-blue-950 rounded-lg
       hover:bg-indigo-950 flex flex-col items-center justify-center py-6`,
         props.disabled && "cursor-not-allowed opacity-75 hover:bg-indigo-950",
-        (pending || props.loading) && "cursor-wait opacity-75 hover:bg-indigo-950",
+        (pending || props.loading) &&
+          "cursor-wait opacity-75 hover:bg-indigo-950"
       )}
     >
       <div />

@@ -6,6 +6,7 @@ import { api } from "@/convex/_generated/api";
 import { useOrganization } from "@clerk/nextjs";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type props = {
   image: string;
@@ -16,6 +17,7 @@ type props = {
 };
 
 const NoBoardFound = (props: props) => {
+  const router = useRouter();
   const { organization } = useOrganization();
   const { mutate, pending } = useApiMutation(api.board.create);
 
@@ -26,10 +28,11 @@ const NoBoardFound = (props: props) => {
       orgId: organization.id,
       title: "Untitled",
     })
-    .then((id) => {
-      toast.success("Board created successfully")
-    })
-    .catch(() => toast.error("Failed to create board"))
+      .then((id) => {
+        toast.success("Board created successfully");
+        router.push(`/board/${id}`);
+      })
+      .catch(() => toast.error("Failed to create board"));
   };
   return (
     <div className="h-full flex flex-col items-center justify-center">
