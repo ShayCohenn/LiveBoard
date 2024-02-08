@@ -8,6 +8,9 @@ import { formatDistanceToNow } from "date-fns";
 import Footer from "./Footer";
 import Actions from "@/components/Actions";
 import { MoreHorizontal } from "lucide-react";
+import { useApiMutation } from "@/hooks/use-api-mutation";
+import { api } from "@/convex/_generated/api";
+import { toast } from "sonner";
 
 type props = {
   id: string;
@@ -22,6 +25,21 @@ type props = {
 
 export const BoardCard = (props: props) => {
   const { userId } = useAuth();
+  const { mutate: mutateFavorite, pending: pendingFavorite } = useApiMutation(
+    api.board.favorite
+  );
+  const { mutate: mutateUnFavorite, pending: pendingUnFavorite } =
+    useApiMutation(api.board.unfavorite);
+
+  const toggleFavorite = () => {
+    if (props.isFavorite) {
+      mutateUnFavorite({ id: props.id })
+      .catch(()=> toast.error("Failed to toggle favorite"))
+    } else {
+      mutateFavorite({ id: props.id, orgId: props.orgId })
+      .catch(()=> toast.error("Failed to toggle favorite"))
+    }
+  };
 
   const authorLabel = userId === props.authorId ? "You" : props.authorName;
   const createdAtLabel = formatDistanceToNow(props.createdAt, {
@@ -58,8 +76,8 @@ export const BoardCard = (props: props) => {
           title={props.title}
           authorLabel={authorLabel}
           createdAtLabel={createdAtLabel}
-          onClick={() => {}}
-          disabled={false}
+          onClick={toggleFavorite}
+          disabled={pendingFavorite || pendingUnFavorite}
         />
       </div>
     </Link>
