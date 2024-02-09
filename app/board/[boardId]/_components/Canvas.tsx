@@ -4,7 +4,11 @@ import Info from "./Info";
 import Participants from "./Participants";
 import Toolbar from "./Toolbar";
 
-const Canvas = () => {
+type props = {
+  boardId: string;
+};
+
+const Canvas = (props: props) => {
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none">
       <Info />
