@@ -10,12 +10,9 @@ type props = {
 };
 
 const Canvas = (props: props) => {
-  const info = useSelf((me) => me.info)
-  console.log(info);
-  
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none">
-      <Info />
+      <Info boardId={props.boardId} />
       <Participants />
       <Toolbar />
     </main>

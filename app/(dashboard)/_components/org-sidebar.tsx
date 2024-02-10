@@ -8,11 +8,8 @@ import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import { OrganizationSwitcher } from "@clerk/nextjs";
 import { LayoutDashboard, Star } from "lucide-react";
+import { font } from "@/constants/font";
 
-const font = Poppins({
-  subsets: ["latin"],
-  weight: ["600"],
-});
 const OrgSidebar = () => {
   const searchParams = useSearchParams();
   const favorites = searchParams.get("favorites");
