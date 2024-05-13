@@ -32,6 +32,7 @@ import {
 import { LiveObject } from "@liveblocks/client";
 import LayerPreview from "./LayerPreview";
 import SelectionBox from "./SelectionBox";
+import SelectionTools from "./SelectionTools";
 
 const MAX_LAYERS: number = 100;
 
@@ -186,13 +187,11 @@ const Canvas = (props: props) => {
     [history]
   );
 
-  const unselectLayers = useMutation((
-    { self, setMyPresence }
-  ) => {
-    if(self.presence.selection.length > 0) {
-      setMyPresence({ selection: [] }, { addToHistory: true})
+  const unselectLayers = useMutation(({ self, setMyPresence }) => {
+    if (self.presence.selection.length > 0) {
+      setMyPresence({ selection: [] }, { addToHistory: true });
     }
-  }, [])
+  }, []);
 
   const onPointerUp = useMutation(
     ({}, e) => {
@@ -202,7 +201,7 @@ const Canvas = (props: props) => {
         canvasState.mode == CanvasMode.None ||
         canvasState.mode === CanvasMode.Pressing
       ) {
-        unselectLayers()
+        unselectLayers();
         setCanvasState({
           mode: CanvasMode.None,
         });
@@ -269,6 +268,7 @@ const Canvas = (props: props) => {
         undo={history.undo}
         redo={history.redo}
       />
+      <SelectionTools camera={camera} setLastUsedColor={setLastUsedColor} />
       <svg
         className="h-[100vh] w-[100vw]"
         onWheel={onWheel}

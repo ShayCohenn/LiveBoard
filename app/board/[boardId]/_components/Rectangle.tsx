@@ -23,7 +23,7 @@ const Rectangle = (props: props) => {
       width={width}
       height={height}
       strokeWidth={3}
-      fill={fill ? colorToCss(fill) : '#CCC'}
+      fill={fill ? colorToCss(fill) : '#000'}
       stroke={props.selectionColor || "transparent"}
     />
   );
