@@ -11,11 +11,8 @@ type props = {
 export const ColorPicker = (props: props) => {
   return (
     <div className="flex flex-wrap gap-2 items-center max-w-[164px] pr-2 mr-2 border-r border-neutral-200">
-      {COLORS.map((color) => (
-        <ColorButton
-          onClick={props.onChange}
-          color={color}
-        />
+      {COLORS.map((color, key) => (
+        <ColorButton key={key} onClick={props.onChange} color={color} />
       ))}
     </div>
   );

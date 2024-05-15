@@ -11,7 +11,7 @@ type props = {
   };
 };
 
-const page = (props: props) => {
+const Page = (props: props) => {
   const { organization } = useOrganization();
 
   return (
@@ -25,4 +25,4 @@ const page = (props: props) => {
   );
 };
 
-export default page;
+export default Page;

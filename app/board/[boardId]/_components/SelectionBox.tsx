@@ -11,7 +11,7 @@ type props = {
 
 const HANDLE_WIDTH = 8;
 
-const SelectionBox = memo((props: props) => {
+const SelectionBox = memo(function SelectionBox(props: props) {
   const soleLayerId = useSelf((me) =>
     me.presence.selection.length === 1 ? me.presence.selection[0] : null
   );
@@ -194,5 +194,7 @@ const SelectionBox = memo((props: props) => {
     </>
   );
 });
+
+SelectionBox.displayName = "SelectionBox";
 
 export default SelectionBox;

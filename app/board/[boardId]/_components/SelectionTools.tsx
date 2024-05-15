@@ -15,7 +15,7 @@ type props = {
   setLastUsedColor: (color: Color) => void;
 };
 
-const SelectionTools = memo((props: props) => {
+const SelectionTools = memo(function SelectionTools(props: props) {
   const selection = useSelf((me) => me.presence.selection);
 
   const moveToBack = useMutation(
@@ -105,5 +105,7 @@ const SelectionTools = memo((props: props) => {
     </div>
   );
 });
+
+SelectionTools.displayName = 'SelectionTools';
 
 export default SelectionTools;
