@@ -42,7 +42,7 @@ const Note = (props: props) => {
         outline: props.selectionColor
           ? `1px solid ${props.selectionColor}`
           : "none",
-        backgroundColor: fill ? colorToCss(fill) : '#000'
+        backgroundColor: fill ? colorToCss(fill) : "#000",
       }}
       className="shadow-xl drop-shadow-2xl shadow-black/80"
     >
