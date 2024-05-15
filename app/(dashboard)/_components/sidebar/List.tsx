@@ -12,7 +12,7 @@ const List = () => {
   if (!userMemberships.data?.length) return null;
   return (
     <ul className="space-y-4">
-      {userMemberships.data?.map((mem) => (
+      {userMemberships.data?.map((mem: any) => (
         <Item
           key={mem.organization.id}
           id={mem.organization.id}

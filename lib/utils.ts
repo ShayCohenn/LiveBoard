@@ -43,6 +43,11 @@ export function colorToCss(color: Color) {
     .padStart(2, "0")}${color.b.toString(16).padStart(2, "0")}`;
 }
 
+export function getContrastingTextColor(color: Color) {
+  const brightness = (color.r * 299 + color.g * 587 + color.b * 114) / 1000;
+  return brightness > 150 ? "#000000" : "#ffffff";
+}
+
 export function connectionIdToColor(connectionId: number): string {
   return colorToCss(COLORS[connectionId % COLORS.length]);
 }

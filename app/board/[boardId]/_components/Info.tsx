@@ -3,7 +3,7 @@
 import Actions from "@/components/Actions";
 import Hint from "@/components/Hint";
 import { Button } from "@/components/ui/button";
-import { font } from "@/constants/font";
+import { poppinsFont } from "@/constants/font";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
@@ -40,7 +40,7 @@ const Info = (props: props) => {
             <span
               className={cn(
                 "font-semibold text-xl ml-2 text-black",
-                font.className
+                poppinsFont.className
               )}
             >
               LiveBoard

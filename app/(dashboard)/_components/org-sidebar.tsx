@@ -3,12 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Poppins } from "next/font/google";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import { OrganizationSwitcher } from "@clerk/nextjs";
 import { LayoutDashboard, Star } from "lucide-react";
-import { font } from "@/constants/font";
+import { poppinsFont } from "@/constants/font";
 
 const OrgSidebar = () => {
   const searchParams = useSearchParams();
@@ -18,7 +17,7 @@ const OrgSidebar = () => {
       <Link href={"/"}>
         <div className="flex items-center gap-x-2 mt-3">
           <Image src={"logo.svg"} alt="logo" height={60} width={60} />
-          <span className={cn("font-semibold text-2xl", font.className)}>
+          <span className={cn("font-semibold text-2xl",poppinsFont.className)}>
             LiveBoard
           </span>
         </div>

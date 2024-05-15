@@ -2,6 +2,7 @@
 
 import { colorToCss } from "@/lib/utils";
 import { Color } from "@/types/canvas";
+import { COLORS } from "@/constants/colors";
 
 type props = {
   onChange: (color: Color) => void;
@@ -10,38 +11,12 @@ type props = {
 export const ColorPicker = (props: props) => {
   return (
     <div className="flex flex-wrap gap-2 items-center max-w-[164px] pr-2 mr-2 border-r border-neutral-200">
-      <ColorButton
-        onClick={props.onChange}
-        color={{
-          r: 20,
-          g: 20,
-          b: 240,
-        }}
-      />
-      <ColorButton
-        onClick={props.onChange}
-        color={{
-          r: 20,
-          g: 240,
-          b: 20,
-        }}
-      />
-      <ColorButton
-        onClick={props.onChange}
-        color={{
-          r: 240,
-          g: 20,
-          b: 20,
-        }}
-      />
-      <ColorButton
-        onClick={props.onChange}
-        color={{
-          r: 20,
-          g: 20,
-          b: 20,
-        }}
-      />
+      {COLORS.map((color) => (
+        <ColorButton
+          onClick={props.onChange}
+          color={color}
+        />
+      ))}
     </div>
   );
 };
