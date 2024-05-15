@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { nanoid } from "nanoid";
 import Info from "./Info";
 import Participants from "./Participants";
@@ -22,11 +22,14 @@ import {
   useMutation,
   useStorage,
   useOthersMapped,
+  useSelf,
 } from "@/liveblocks.config";
 import CursorsPresence from "./CursorsPresence";
 import {
+  colorToCss,
   connectionIdToColor,
   findIntersectingLayersWithRectangle,
+  penPointsToPathLayer,
   pointerEventToCanvasPoint,
   resizeBounds,
 } from "@/lib/utils";
@@ -34,6 +37,9 @@ import { LiveObject } from "@liveblocks/client";
 import LayerPreview from "./LayerPreview";
 import SelectionBox from "./SelectionBox";
 import SelectionTools from "./SelectionTools";
+import Path from "./Path";
+import { useDisableScrollBounce } from "@/hooks/use-disable-scroll-bounce";
+import { useDeleteLayers } from "@/hooks/use-delete-layers";
 
 const MAX_LAYERS: number = 100;
 const MULTI_SELECTION_THRESHOLD: number = 5;
@@ -44,6 +50,7 @@ type props = {
 
 const Canvas = (props: props) => {
   const layerIds = useStorage((root) => root.layerIds);
+  const pencilDraft = useSelf((me) => me.presence.pencilDraft);
 
   const [canvasState, setCanvasState] = useState<CanvasState>({
     mode: CanvasMode.None,
@@ -59,6 +66,7 @@ const Canvas = (props: props) => {
   const history = useHistory();
   const canRedo = useCanRedo();
   const canUndo = useCanUndo();
+  useDisableScrollBounce();
 
   const insertLayer = useMutation(
     (
@@ -279,22 +287,35 @@ const Canvas = (props: props) => {
     }
   }, []);
 
-  const insertPath = useMutation(({ storage, self, setMyPresence }) => {
-    const liveLayers = storage.get("layers");
-    const { pencilDraft } = self.presence;
+  const insertPath = useMutation(
+    ({ storage, self, setMyPresence }) => {
+      const liveLayers = storage.get("layers");
+      const { pencilDraft } = self.presence;
 
-    if (
-      pencilDraft == null ||
-      pencilDraft.length < 2 ||
-      liveLayers.size >= MAX_LAYERS
-    ) {
+      if (
+        pencilDraft == null ||
+        pencilDraft.length < 2 ||
+        liveLayers.size >= MAX_LAYERS
+      ) {
+        setMyPresence({ pencilDraft: null });
+        return;
+      }
+
+      const id = nanoid();
+
+      liveLayers.set(
+        id,
+        new LiveObject(penPointsToPathLayer(pencilDraft, lastUsedColor))
+      );
+
+      const liveLayerIds = storage.get("layerIds");
+      liveLayerIds.push(id);
+
       setMyPresence({ pencilDraft: null });
-      return;
-    }
-
-    const id = nanoid()
-    
-  }, []);
+      setCanvasState({ mode: CanvasMode.Pencil });
+    },
+    [lastUsedColor]
+  );
 
   const onPointerUp = useMutation(
     ({}, e) => {
@@ -369,6 +390,32 @@ const Canvas = (props: props) => {
     [setCanvasState, camera, history, canvasState.mode]
   );
 
+  const deleteLayers = useDeleteLayers();
+
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      switch (e.key) {
+        case "z": {
+          if (e.ctrlKey || e.metaKey) {
+              history.undo()
+            break;
+          }
+        }
+        case "y": {
+          if (e.ctrlKey || e.metaKey) {
+              history.redo()
+            break;
+          }
+        }
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [deleteLayers, history]);
+
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none">
       <Info boardId={props.boardId} />
@@ -415,6 +462,14 @@ const Canvas = (props: props) => {
               />
             )}
           <CursorsPresence />
+          {pencilDraft != null && pencilDraft.length > 0 && (
+            <Path
+              points={pencilDraft}
+              fill={colorToCss(lastUsedColor)}
+              x={0}
+              y={0}
+            />
+          )}
         </g>
       </svg>
     </main>
