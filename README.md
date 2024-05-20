@@ -27,5 +27,10 @@ In the whiteboard there are many features such as a drawing pencil inserting sha
 <img src="./media/invitation.gif"/>
 
 ## Board Actions:
+<<<<<<< HEAD
 <img src="./media/board-actions.gif"/>
 <img src="./media/board-actions2.gif" /> 
+=======
+<video src="./media/board-actions.mp4" controls="controls"></video>
+<video src="./media/board-actions2.mp4" controls="controls"></video>
+>>>>>>> e0fb43a51c70c93d51c800f915961081f045ad85
