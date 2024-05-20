@@ -25,10 +25,7 @@ In the whiteboard there are many features such as a drawing pencil inserting sha
 
 ## Invitation:
 
-<video src="./invitation.mp4" placeholder="path/to.mp4" controls title="test-title">
-    Sorry, your browser doesn't support HTML 5 video.
-   </video>
+https://github.com/ShayCohenn/LiveBoard/assets/127669502/1f173cf6-cfd2-4be4-affa-9b43a742564d
 
-## Board Actions:
-<img src="./media/board-actions.gif"/>
+
 <img src="./media/board-actions2.gif" /> 
