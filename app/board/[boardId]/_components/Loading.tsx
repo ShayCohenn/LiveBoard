@@ -1,7 +1,7 @@
 import { Loader } from "lucide-react";
 import Info, { InfoSkeleton } from "./Info";
 import Participants, { ParticipantsSkeleton } from "./Participants";
-import Toolbar, { ToolbarSkeleton } from "./Toolbar";
+import Toolbar, { ToolbarSkeleton } from "./canvas_items/Toolbar";
 
 const Loading = () => {
   return (

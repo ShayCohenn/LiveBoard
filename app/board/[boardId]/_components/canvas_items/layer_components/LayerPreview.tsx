@@ -3,11 +3,11 @@
 import { useStorage } from "@/liveblocks.config";
 import { LayerType } from "@/types/canvas";
 import { memo } from "react";
-import Rectangle from "./Rectangle";
-import Ellipse from "./Ellipse";
-import Text from "./Text";
-import Note from "./Note";
-import Path from "./Path";
+import Rectangle from "../layers/Rectangle";
+import Ellipse from "../layers/Ellipse";
+import Text from "../layers/Text";
+import Note from "../layers/Note";
+import Path from "../layers/Path";
 import { colorToCss } from "@/lib/utils";
 
 type props = {
