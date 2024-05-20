@@ -1,5 +1,7 @@
 # [LiveBoard](https://live-board-plum.vercel.app/)
 
+### https://live-board-plum.vercel.app/
+
 ## Description:
 <span style="font-size:16px">LiveBoard is a digital collaboration platform that helps teams and educators visualize ideas, brainstorm, and work together in real time, just like a digital whiteboard.
 
@@ -21,3 +23,9 @@ In the whiteboard there are many features such as a drawing pencil inserting sha
 
 • Deployed on [Vercel](https://vercel.com/)
 
+## Invitation:
+<video src="media/invitation.mp4" controls="controls"></video>
+
+## Board Actions:
+<video src="media/board-actions.mp4" controls="controls"></video>
+<video src="media/board-actions2.mp4" controls="controls"></video>
