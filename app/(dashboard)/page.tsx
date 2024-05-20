@@ -4,14 +4,7 @@ import { useOrganization } from "@clerk/nextjs";
 import EmptyOrg from "./_components/empty-org";
 import BoardList from "./_components/BoardList";
 
-type props = {
-  searchParams: {
-    search?: string;
-    favorites?: string;
-  };
-};
-
-const Page = (props: props) => {
+const Page = () => {
   const { organization } = useOrganization();
 
   return (
@@ -19,7 +12,7 @@ const Page = (props: props) => {
       {!organization ? (
         <EmptyOrg />
       ) : (
-        <BoardList orgId={organization.id} query={props.searchParams} />
+        <BoardList orgId={organization.id} />
       )}
     </div>
   );

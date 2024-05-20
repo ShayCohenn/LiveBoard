@@ -9,10 +9,10 @@ import { useSearchParams } from "next/navigation";
 
 type props = {
   orgId: string;
-  query: {
-    search?: string;
-    favorites?: string;
-  };
+  // query: {
+  //   search?: string;
+  //   favorites?: string;
+  // };
 };
 
 const BoardList = (props: props) => {
@@ -23,17 +23,13 @@ const BoardList = (props: props) => {
     orgId: props.orgId,
     favorites: favorites ? favorites : "",
     search: search ? search : "",
-  });
-
-  console.log("Query parameters:", { props });
-  console.log("Data received:", data);
-  console.log("Search: ", search);
+  })
 
   if (data === undefined) {
     return (
       <div>
         <h2 className="text-3xl">
-          {props.query.favorites ? "Favorite Boards" : "Team Boards"}
+          {favorites ? "Favorite Boards" : "Team Boards"}
         </h2>
         <div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 
@@ -49,7 +45,7 @@ const BoardList = (props: props) => {
     );
   }
 
-  if (!data?.length && props.query.search) {
+  if (!data?.length && search) {
     return (
       <NoBoardFound
         image="empty-search.svg"
@@ -59,7 +55,7 @@ const BoardList = (props: props) => {
     );
   }
 
-  if (!data?.length && props.query.favorites) {
+  if (!data?.length && favorites) {
     return (
       <NoBoardFound
         image="empty-favorites.svg"
@@ -83,7 +79,7 @@ const BoardList = (props: props) => {
   return (
     <div>
       <h2 className="text-3xl">
-        {props.query.favorites ? "Favorite Boards" : "Team Boards"}
+        {favorites ? "Favorite Boards" : "Team Boards"}
       </h2>
       <div
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 
