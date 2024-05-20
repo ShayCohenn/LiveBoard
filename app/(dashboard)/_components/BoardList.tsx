@@ -21,8 +21,8 @@ const BoardList = (props: props) => {
   const favorites = params.get("favorites");
   const data = useQuery(api.boards.get, {
     orgId: props.orgId,
-    favorites: favorites!,
-    search: search!,
+    favorites: favorites ? favorites : "",
+    search: search ? search : "",
   });
 
   console.log("Query parameters:", { props });
