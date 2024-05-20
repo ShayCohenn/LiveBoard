@@ -1,3 +1,5 @@
+
+https://github.com/ShayCohenn/LiveBoard/assets/127669502/c638d02f-4b2e-46cb-b2fc-37fd465721a3
 # [LiveBoard](https://live-board-plum.vercel.app/)
 
 ### https://live-board-plum.vercel.app/
@@ -27,5 +29,7 @@ In the whiteboard there are many features such as a drawing pencil inserting sha
 
 https://github.com/ShayCohenn/LiveBoard/assets/127669502/1f173cf6-cfd2-4be4-affa-9b43a742564d
 
+## Board Actions:
 
-<img src="./media/board-actions2.gif" /> 
+https://github.com/ShayCohenn/LiveBoard/assets/127669502/00ee444d-3a91-4d7b-96ee-66bb1c3d3bc7
+
