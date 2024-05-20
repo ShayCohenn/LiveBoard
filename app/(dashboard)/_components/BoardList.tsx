@@ -21,6 +21,9 @@ const BoardList = (props: props) => {
     search: props.query.search,
   });
 
+  console.log("Query parameters:", { props });
+  console.log("Data received:", data);
+
   if (data === undefined) {
     return (
       <div>
