@@ -12,5 +12,5 @@ export const COLORS: Color[] = [
     { r: 128, g: 0, b: 128 },    // Purple
     { r: 255, g: 165, b: 0 },    // Orange
     { r: 0, g: 128, b: 128 },    // Teal
-    { r: 150, g: 150, b: 150 }     // Pink
+    { r: 150, g: 150, b: 150 }     // Gray
 ];
