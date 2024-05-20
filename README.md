@@ -29,3 +29,5 @@ In the whiteboard there are many features such as a drawing pencil inserting sha
 ## Board Actions:
 <img src="./media/board-actions.gif"/>
 <img src="./media/board-actions2.gif" /> 
+
+https://github.com/ShayCohenn/LiveBoard/blob/main/media/invitation.mp4
