@@ -24,9 +24,7 @@ In the whiteboard there are many features such as a drawing pencil inserting sha
 • Deployed on [Vercel](https://vercel.com/)
 
 ## Invitation:
-<video controls='controls'>
-<source src="./media/invitation.mp4" type="video/mp4"/>
-</video>
+<video controls='controls' src="./media/invitation.mp4"/>
 
 ## Board Actions:
 <img src="./media/board-actions.gif"/>
