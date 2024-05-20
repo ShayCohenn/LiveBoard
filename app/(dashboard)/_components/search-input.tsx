@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import qs from "query-string";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/debounce";
@@ -35,7 +35,8 @@ const SearchInput = () => {
       text-muted-foreground h-4 w-4"
       />
       <Input
-        className="w-full max-w-[516px] pl-9"
+        type="search"
+        className="w-full max-w-[500px] pl-9"
         placeholder="Search Boards..."
         onChange={handleChange}
         value={value}
