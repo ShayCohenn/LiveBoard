@@ -17,7 +17,8 @@ type props = {
 const BoardList = (props: props) => {
   const data = useQuery(api.boards.get, {
     orgId: props.orgId,
-    ...props.query,
+    favorites: props.query.favorites,
+    search: props.query.search,
   });
 
   if (data === undefined) {
