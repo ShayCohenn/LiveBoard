@@ -5,6 +5,7 @@ import NoBoardFound from "./no-boards-found";
 import { api } from "@/convex/_generated/api";
 import { BoardCard } from "./board-card";
 import { NewBoardButton } from "./new-board-button";
+import { useSearchParams } from "next/navigation";
 
 type props = {
   orgId: string;
@@ -15,14 +16,18 @@ type props = {
 };
 
 const BoardList = (props: props) => {
+  const params = useSearchParams();
+  const search = params.get("search");
+  const favorites = params.get("favorites");
   const data = useQuery(api.boards.get, {
     orgId: props.orgId,
-    favorites: props.query.favorites,
-    search: props.query.search,
+    favorites: favorites!,
+    search: search!,
   });
 
   console.log("Query parameters:", { props });
   console.log("Data received:", data);
+  console.log("Search: ", search);
 
   if (data === undefined) {
     return (
